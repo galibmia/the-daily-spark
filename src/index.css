@@ -1,3 +1,14 @@
 .bg-custom-gray{
-    background-color: rgb(243, 242, 242);
+    background-color: rgb(244, 244, 244);
+}
+
+.border-none{
+    border: none !important;
+}
+
+.bg-custom-dark{
+    background-color: #ffffff;
+}
+.bg-custom-dark:hover{
+    background-color: #d9d8d8;
 }
