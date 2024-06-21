@@ -19,7 +19,7 @@ const LeftNav = () => {
             <h4 className='ps-2 mb-3'>All Category</h4>
             <ListGroup className=''>
                 {
-                    categories.map(category => <Link className='text-decoration-none p-2'><ListGroup.Item className='bg-custom-dark border-none mb-1 h5 text-secondary' key={category.id}>{category.name}</ListGroup.Item></Link>)
+                    categories.map(category => <Link to={`/category/${category.id}`} className='text-decoration-none p-2'><ListGroup.Item className='bg-custom-dark border-none mb-1 h5 text-secondary' key={category.id}>{category.name}</ListGroup.Item></Link>)
                 }
             </ListGroup>
         </div>
