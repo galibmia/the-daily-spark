@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCk8iZGyb21vvPtH5SBB-k8z9E3j4gUO6k",
-  authDomain: "the-daily-spark.firebaseapp.com",
-  projectId: "the-daily-spark",
-  storageBucket: "the-daily-spark.appspot.com",
-  messagingSenderId: "172067985191",
-  appId: "1:172067985191:web:200bb83c764f30d5233b02"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase

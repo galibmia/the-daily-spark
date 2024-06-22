@@ -15,12 +15,13 @@ const AuthProvider = ({ children }) => {
 
     const [error, setError] = useState(null);
 
-    const [loading, setLoading] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, loggedUser => {
             console.log(loggedUser)
             setUser(loggedUser);
+            setLoading(false)
         })
         return () => {
             unsubscribe();
@@ -29,15 +30,18 @@ const AuthProvider = ({ children }) => {
 
 
     const logInWithGoogle = () => {
+        setLoading(true);
         return signInWithPopup(auth, googleProvider);
     }
 
     // Sign Up / Create account with Email and Password
     const signUpWithEmailPassword = (email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const changeProfile = (name, photoUrl) => {
+        setLoading(true);
         return updateProfile(auth.currentUser, {
             displayName: name, photoURL: photoUrl
         })
@@ -45,10 +49,12 @@ const AuthProvider = ({ children }) => {
 
     // Sign In account with Email and Password
     const logInWithEmailPassword = (email, password) => {
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     const logOut = () => {
+        setLoading(true);
         return signOut(auth);
     }
 

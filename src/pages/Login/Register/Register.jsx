@@ -1,12 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const Register = () => {
-    const { signUpWithEmailPassword, setError, error, setUser, user, changeProfile } = useContext(AuthContext);
+    const { signUpWithEmailPassword, setError, error, changeProfile } = useContext(AuthContext);
 
     const navigate = useNavigate();
+
+    const [accepted, setAccepted] = useState(false);
 
     const handleCreateUser = (event) => {
         event.preventDefault();
@@ -35,7 +37,7 @@ const Register = () => {
                     .catch(err => {
                         setError(err.message)
                     })
-                    navigate('/')
+                navigate('/')
 
             })
             .catch(err => {
@@ -43,8 +45,13 @@ const Register = () => {
             })
     }
 
+    const handleChecked = (e) => {
+        const value = e.target.checked;
+        setAccepted(value);
+    }
+
     return (
-        <Container className='w-25 mx-auto mt-5 border rounded px-5 py-4'>
+        <Container className='w-25 mx-auto mt-5 border shadow rounded px-5 py-4'>
             <h3 className='text-center mb-3'>Sign Up</h3>
             <Form onSubmit={handleCreateUser}>
                 <Form.Group className="mb-3" controlId="formBasicName">
@@ -68,17 +75,27 @@ const Register = () => {
                     <Form.Control type="password" name='confirmPassword' placeholder="Confirm Password" required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Agree with terms and condition" required />
+                    <Form.Check
+                        onClick={handleChecked}
+                        type="checkbox"
+                        label={<>Agree with <Link to={'/terms'} className='text-decoration-none'>terms and condition</Link></>}
+                        required />
                 </Form.Group>
                 <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Text>Already have account? <Link to={'/login'} className='text-decoration-none'>Login Now</Link></Form.Text>
+                    <Form.Text>Already have account? <Link to={'/login'} className='text-decoration-none'>Login now</Link></Form.Text>
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Login
-                </Button>
+                <div className="d-grid gap-2">
+                    <Button
+                    type='submit'
+                    disabled = {!accepted} 
+                    variant="dark" 
+                    size="lg">
+                        Register
+                    </Button>
+                </div>
                 {
-                    user && <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Text className='text-danger'>{user.email}</Form.Text>
+                    error && <Form.Group className="mb-3">
+                        <Form.Text className='text-danger'>{error.message}</Form.Text>
                     </Form.Group>
                 }
             </Form>
