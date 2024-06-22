@@ -15,7 +15,7 @@ const NewsCard = ({ news }) => {
                 <Image style={{ height: '40px' }} className='me-2' src={author?.img} roundedCircle />
                 <div className='flex-grow-1'>
                     <h6 className='my-0 font-weight-bold'>{author?.name}</h6>
-                    <p><small>{moment(author?.published_date).format('D-MM-yyyy')}</small></p>
+                    <p className='mb-0'><small>{moment(author?.published_date).format('D-MM-yyyy')}</small></p>
                 </div>
                 <div className='mt-2'>
                     <FaRegBookmark className='me-2 text-secondary'></FaRegBookmark>
