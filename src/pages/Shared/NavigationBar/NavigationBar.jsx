@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 import { Button, Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
 import { AuthContext } from '../../../providers/AuthProvider';
 
 const NavigationBar = () => {
-    const {user} = useContext(AuthContext);
+    const {user, logOut, setError} = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {})
+        .catch(err => {setError(err.message)})
+    }
 
     return (
         <Container>
@@ -16,14 +21,14 @@ const NavigationBar = () => {
                         <Nav className="mx-auto">
                             <Nav.Link as={Link} to="/category/0">Home</Nav.Link>
                             <Nav.Link as={Link} to="/">All news</Nav.Link>
-                            <Nav.Link as={Link} to="/career">Career</Nav.Link>
+                            <Nav.Link as={Link} to="/register">Register</Nav.Link>
                         </Nav>
                         <Nav className='align-items-lg-center'>
-                            {user && <Nav.Link as={Link} to="/profile"><FaUserCircle style={{ fontSize: "2rem" }}></FaUserCircle></Nav.Link>}
+                            {user && <Nav.Link as={Link} to="/profile"><img style={{height: "40px", borderRadius: "50%"}} src={user.photoURL} alt="" /></Nav.Link>}
                             <Nav.Link eventKey={2} as={Link} to="/login">
                                 {
-                                    user ? <Button variant="dark">Log Out</Button> :
-                                        <Link to={'/'}><Button variant="dark">Login</Button></Link>
+                                    user ? <Button onClick={handleLogOut} variant="dark">Log Out</Button> :
+                                        <Link to={'/login'}><Button variant="dark">Login</Button></Link>
                                 }
                             </Nav.Link>
                         </Nav>
