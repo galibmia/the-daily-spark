@@ -1,14 +1,22 @@
-.bg-custom-gray{
+.bg-custom-gray {
     background-color: rgb(244, 244, 244);
 }
 
-.border-none{
+.border-none {
     border: none !important;
 }
 
-.bg-custom-dark{
+.bg-custom-dark {
     background-color: #ffffff;
 }
-.bg-custom-dark:hover{
+
+.bg-custom-dark:hover {
     background-color: #d9d8d8;
+}
+
+.playwrite-id-bold {
+    font-family: "Playwrite ID", cursive;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
 }
